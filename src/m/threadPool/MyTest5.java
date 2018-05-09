@@ -27,7 +27,7 @@ public class MyTest5 {
 		}
 		
 		Thread.sleep(1);
-		pool.shutdown();//这个表示会执行完所有的任务才终止
+		pool.shutdown();//这个表示会不再接受新任务，并执行完线程池中所有的任务才退出
 		long l2 = System.currentTimeMillis();
 		System.out.println(l2-l1);
 //		System.out.println(executeCount);//executeCount为10000 说明所有线程都会执行

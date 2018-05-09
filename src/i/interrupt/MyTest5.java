@@ -6,7 +6,8 @@ import java.util.Set;
 import java.util.concurrent.Semaphore;
 
 /**
- * Semaphore 信号量的使用：Semaphore中管理着一组虚拟的许可，许可的初始数量由构造函数来指定，在执行操作时可以首先获取许可（只要还有可用的许可）
+ * Semaphore 信号量的使用：Semaphore中管理着一组虚拟的许可，许可的初始数量由构造函数来指定，
+ * 在执行操作时可以首先获取许可（只要还有可用的许可）
  * 并在使用后释放许可，如果没有许可，那么acquire将阻塞，直到有许可，release方法将返回一个许可给信号量（也就是释放许可）
  * 初始值为1的Semaphore可用作互斥体，并具备不可重入的加锁语义，
  * 
