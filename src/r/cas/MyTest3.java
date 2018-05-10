@@ -2,6 +2,7 @@ package r.cas;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author yyl-pc
@@ -20,8 +21,8 @@ public class MyTest3 {
 				}
 			});
 		}
-		Thread.sleep(1000);
 		pool.shutdown();
+		pool.awaitTermination(10, TimeUnit.SECONDS);  
 		System.out.println(syn.getValue());
 		System.out.println(System.currentTimeMillis()-t1);
 	}

@@ -2,6 +2,7 @@ package r.cas;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 非阻塞的计数器（使用cas实现一个线程安全的计数器）
@@ -26,8 +27,8 @@ public class MyTest2 {
 				}
 			});
 		}
-		Thread.sleep(1000);
 		pool.shutdown();
+		pool.awaitTermination(10, TimeUnit.SECONDS);  
 		System.out.println(cas.getValue());
 		System.out.println(System.currentTimeMillis()-t1);
 	}

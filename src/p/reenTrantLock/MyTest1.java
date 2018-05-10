@@ -9,6 +9,7 @@ import java.util.concurrent.locks.Lock;
 /**
  * 通过tryLock来避免锁顺序死锁，这个就是比内置锁好的地方，
  * 内置锁很难实现带有时间限制的操作，并且内置锁不能中断获取锁的操作
+ * 使用ReentrantLock来获取锁，若不能同时获取两个锁，那么全部释放之前的锁并且重试
  * @author yyl-pc
  *
  */
@@ -46,9 +47,9 @@ public class MyTest1 {
 		long randMod = getRandomDelayModulusNanos(timeout, unit);
 		long stopTime = System.currentTimeMillis()+unit.toNanos(timeout);
 		while(true) {
-			if(fromAccount.lock.tryLock()) {
+			if(fromAccount.lock.tryLock()) {//尝试获取第一个锁
 				try {
-					if(toAccount.lock.tryLock()) {  
+					if(toAccount.lock.tryLock()) { //尝试获取第二个锁
 						try {
 							if(fromAccount.getBalance().compareTo(amount)<0) {
 								throw new NullPointerException();
@@ -67,7 +68,7 @@ public class MyTest1 {
 			}
 			if(System.currentTimeMillis()<stopTime)
 				return false;
-			NANOSECONDS.sleep(fixedDelay + rnd.nextLong() % randMod);
+			NANOSECONDS.sleep(fixedDelay + rnd.nextLong() % randMod);//减少发生活锁的可能性
 		}
 	}
 	private static final int DELAY_FIXED = 1;

@@ -6,6 +6,7 @@ import java.util.concurrent.CyclicBarrier;
  * 	栅栏的使用：主要是CyclicBarrier的使用
  * CyclicBarrier就是可循环使用（Cyclic）的屏障（Barrier）：它要做的事情是让一组线程到达一个屏障
  * （也可以叫同步点）时被阻塞，直到最后一个线程到达屏障时，屏障才会开门，所有被屏障拦截的线程才会继续干活
+ * 这个例子演示的是两道栅栏，
  * @author yyl-pc
  *
  */
@@ -19,11 +20,13 @@ public class MyTest6 {
 			public void run() {
 				try {
 					bar.await();
+					bar.await();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			};
 		}.start();
+		bar.await();
 		bar.await();
 		System.out.println("达到通过栅栏线程数：开门");
 	}

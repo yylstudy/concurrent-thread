@@ -15,7 +15,7 @@ public class MyTest2 {
 	public boolean trySendOnSharedLine(String message,long timeout,TimeUnit unit) throws InterruptedException {
 		long nanosToLock = unit.toNanos(timeout)-estimatedNanosToSend(message);
 		if(!lock.tryLock(nanosToLock,NANOSECONDS))
-			return false;
+			return false;//不能再规定时间获取锁，直接返回false
 		try {
 			return sendOnSharedLine(message);
 		}finally {

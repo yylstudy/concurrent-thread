@@ -1,7 +1,8 @@
 package q.cache;
 
 /**
- * MyTest1的简化版本，但是仍然不是一个好的方案
+ * MyTest1的简化版本，将重试机制直接写进put和take方法，但是仍然不是一个好的方案，
+ * 因为会损失一部分的响应时间
  * @author yyl-pc
  *
  */
